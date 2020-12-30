@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jxd.mp.dao.IEmpDao">
+
+    <!--IPage<Emp> selectPage(Page<Emp> page);-->
+    <select id="selectPage" resultType="com.jxd.mp.model.Emp">
+        select empno, ename, sex from emp
+    </select>
+
+<!--     List<Map<String,String>> selectEmpsWithDept();-->
+<!--    &#45;&#45;         instr(ename,#{ename}) > 0   可以替代like实现模糊查询，同时可处理%这样的特殊字符-->
+    <select id="selectEmpsWithDept"  resultType="java.util.Map">
+        SELECT empno,ename,sex,hriedate,dname from emp e left join dept d on
+        e.depId = d.depId where ename
+        like concat('%',#{ename},'%')
+
+    </select>
+</mapper>
